@@ -163,23 +163,23 @@
         var id = {{$id_dispositivo}};
         var id2 = id.toString();
         var url = `{{url('stock/chart/${id2}')}}`;
-        var Years = new Array();
-        var Prices = new Array();
+        var Data = new Array();
+        var Temp = new Array();
         $(document).ready(function(){
           $.get(url, function(response){
             response.forEach(function(data){
-                Prices.push(data.temperatura);
-                Years.push(data.created_at);
+                Temp.push(data.temperatura);
+                Data.push(data.created_at);
             });
             var ctx = document.getElementById("canvas").getContext('2d');
                 var myChart = new Chart(ctx, {
                   type: 'line',
                   
                   data: {
-                      labels:Years,
+                      labels:Data,
                       datasets: [{
                            label: 'Temperatura',
-                          data: Prices,
+                          data: Temp,
                           borderWidth: 3,
                           borderColor: 'rgb(77,166,253)',
                           backgroundColor: 'rgba(70,166,253,0.35)'
