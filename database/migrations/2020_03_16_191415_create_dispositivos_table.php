@@ -19,6 +19,7 @@ class CreateDispositivosTable extends Migration
             $table->string('email_notificacao');
             $table->string('data_grafico')->nullable();
             $table->string('alarme');
+            $table->string('unidade_temp')->nullable();
             $table->integer('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
