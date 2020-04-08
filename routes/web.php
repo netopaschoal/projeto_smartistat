@@ -76,5 +76,7 @@ Route::post('/novo_disp','ControladorSistema@store');
 
 Route::post('/data_grafico/{id}','ControladorSistema@mudar_grafico'); // colocar o token
 
+Route::get('/unidade_temperatura/{id}/{unidade}','ControladorSecundario@mudar_unidade')->name("unidade.temperatura");
+
 
 

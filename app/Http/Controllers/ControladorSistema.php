@@ -139,21 +139,33 @@ class ControladorSistema extends Controller
         else {
             foreach($disp as $d){
                 $data_dispositivo = $d->data_grafico;
+                $unidade_temperatura = $d->unidade_temp;
             }
             if(count($dados) == 0){
                 echo "nao tem dados";
             }
-            else{
-                foreach($dados as $dado){
-                    $temp[$i] = $dado->temperatura;
-                $i++;
+            else{                                               // converte pra unidade definida
+                if($unidade_temperatura == "c"){
+                    foreach($dados as $dado){                       
+                        $temp[$i] = $dado->temperatura;
+                    $i++;
+                    }
                 }
-            }
+                else {
+                    foreach($dados as $dado){                     // formula   (1 °C × 9/5) + 32 = 33,8 °F
+                        $temp[$i] = ($dado->temperatura * (9/5)) + 32 ;
+                    $i++;
+                    }
+
+                }
+               
+            }                                                   //termina aqui
             
         $temp_max = max($temp);
         $temp_min = min($temp);
         $temp_media = round(array_sum($temp) / count($temp), 2);
         $temp_data = $dados[count($temp) - 1]['created_at']; // pega a ultima posicao do array
+       // $teste_unidade = "2";
             if (strlen($data_dispositivo) > 6){
                 $datas = explode("D", $data_dispositivo);
                 $data_inicio = $datas[0]." - "; 
@@ -167,7 +179,7 @@ class ControladorSistema extends Controller
     }
       return view('grafico', ['id_dispositivo'=>$id,'data_inicio'=>$data_inicio,
       'data_final'=>$data_final,'temp_max'=>$temp_max,'temp_min'=>$temp_min,
-      'temp_media'=>$temp_media,'temp_data'=>$temp_data]);
+      'temp_media'=>$temp_media,'temp_data'=>$temp_data,'unidade_temperatura'=>$unidade_temperatura]);
     
 }
     /**
@@ -184,6 +196,7 @@ class ControladorSistema extends Controller
     else {
         foreach($disp as $d){
             $data_dispositivo = $d->data_grafico;
+            $unidade_temperatura = $d->unidade_temp;
         }
         if (strlen($data_dispositivo) > 6){
             $datas = explode("D", $data_dispositivo);

@@ -120,8 +120,8 @@
                                               Unidade de temperatura
                                             </button>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                              <a class="dropdown-item" href="#">Celsius</a>
-                                              <a class="dropdown-item" href="#">Fahrenheit</a>
+                                              <a class="dropdown-item" href="{{ route('unidade.temperatura',['id' => $id_dispositivo, 'unidade' => "1"]) }}">Celsius</a>
+                                              <a class="dropdown-item" href="{{ route('unidade.temperatura',['id' => $id_dispositivo, 'unidade' => "2"]) }}">Fahrenheit</a>
                                             </div>
                                           </div>
                                           <div class="card-body">
@@ -162,15 +162,26 @@
         <script>
         var id = {{$id_dispositivo}};
         var id2 = id.toString();
+        var unidade_temp = {{$unidade_temperatura}};
+        var unidade_temp2 = unidade_temp.toString();
         var url = `{{url('stock/chart/${id2}')}}`;
         var Data = new Array();
         var Temp = new Array();
         $(document).ready(function(){
           $.get(url, function(response){
-            response.forEach(function(data){
-                Temp.push(data.temperatura);
+              if(unidade_temp2 == "2"){
+                response.forEach(function(data){ //                         fazer aqui a convesao de unidade
+                Temp.push((Number(data.temperatura) * (9/5)) + 32);         // formula   (1 °C × 9/5) + 32 = 33,8 °F
                 Data.push(data.created_at);
-            });
+            });   
+              }
+              else {
+                response.forEach(function(data){ //                        
+                Temp.push(data.temperatura);                                
+                Data.push(data.created_at);
+            }); 
+              }
+                                          //acaba aqui
             var ctx = document.getElementById("canvas").getContext('2d');
                 var myChart = new Chart(ctx, {
                   type: 'line',
