@@ -127,7 +127,7 @@
                                           <div class="card-body">
                                             <h3>Unidade selecionada:</h3>
                                             <br>
-                                            <h3>Graus Celsius</h3>
+                                            <h3>{{$nome_unidade}}</h3>
                                           </div>
                                           
 

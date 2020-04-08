@@ -159,7 +159,13 @@ class ControladorSistema extends Controller
 
                 }
                
-            }                                                   //termina aqui
+            }
+            if($unidade_temperatura == "1"){
+                $nome_unidade = "Celsius";
+            } 
+            else {
+                $nome_unidade = "Fahrenheit";
+            }                                                  //termina aqui
             
         $temp_max = max($temp);
         $temp_min = min($temp);
@@ -179,7 +185,7 @@ class ControladorSistema extends Controller
     }
       return view('grafico', ['id_dispositivo'=>$id,'data_inicio'=>$data_inicio,
       'data_final'=>$data_final,'temp_max'=>$temp_max,'temp_min'=>$temp_min,
-      'temp_media'=>$temp_media,'temp_data'=>$temp_data,'unidade_temperatura'=>$unidade_temperatura]);
+      'temp_media'=>$temp_media,'temp_data'=>$temp_data,'unidade_temperatura'=>$unidade_temperatura,'nome_unidade'=>$nome_unidade]);
     
 }
     /**
