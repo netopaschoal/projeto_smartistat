@@ -10,9 +10,9 @@
         <meta name="author" content="" />
         <title>Dashboard - SB Admin</title>
         
-        <link href="{{asset('css/app.css')}}" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.3/css/bootstrap-select.min.css">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
+        
+        <!-- <link href="{asset('css/app.css')}}" rel="stylesheet" type="text/css"> -->
+        
     </head>
     <div class="sb-nav-fixed">
         <div id="layoutSidenav">
@@ -99,15 +99,44 @@
                                         </div>
                                         
                                     </form></div>
-                                    <div class="switch">
-                                        <!-- Material checked -->
+
+<!-- modal -->
+<div class="modal" tabindex="-1" role="dialog" id="alarme_form">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form class="form-horizontal" id="formAlarme">
+                <div class="modal-header">
+                    <h5 class="modal-title">Configuração do Alarme</h5>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="id" class="form-control">
+                    <div class="form-group">
+                        <label for="nomeEmail" class="control-label">Email de notificação</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="nomeEmail" placeholder="Email:">
+                        </div>
+                        <label for="temp_max" class="control-label">Valor máximo de temperatura</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="temp_max" placeholder="Email:">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                    <button type="cancel" class="btn btn-secondary" data-dissmiss="modal">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+                                    
 <!-- Default checked -->
 <div class="custom-control custom-switch">
-    <input type="checkbox" class="custom-control-input" id="customSwitch1" checked>
-    <label class="custom-control-label" for="customSwitch1">Alarme ativado!</label>
-    <center><button type="submit" class="btn btn-primary btn-sm">Editar</button></center>
+    <input type="checkbox" data-id="{{$id_dispositivo}}" name="status" class="js-switch" {{ $alarme_status == 1 ? 'checked' : '' }}>
+    <button style="margin-left: 8vw;" type="submit" class="btn btn-primary btn-sm" onClick="mostra_modal()">Editar</button>
   </div>
-                                      </div>
+                                      
                                 </div>
                             </div>
     
@@ -204,6 +233,78 @@
           });
         });
         </script>
+        <script>let elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+
+            elems.forEach(function(html) {
+                let switchery = new Switchery(html,  { size: 'small' });
+                $(document).ready(function(){
+        $('.js-switch').change(function () {
+            let status = $(this).prop('checked') === true ? 1 : 0;
+            let userId = $(this).data('id');
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: '{{ route('users.update.status') }}',
+                data: {'status': status, 'user_id': userId},
+                success: function (data) {
+                    toastr.options.closeButton = true;
+                    toastr.options.closeMethod = 'fadeOut';
+                    toastr.options.closeDuration = 100;
+                    toastr.success(data.message);
+                }
+            });
+        });
+    });
+            });
+            // codigo do modal
+            $.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN' : "{{ csrf_token() }}"
+    }
+})
+function mostra_modal(){
+   // $('#nomeEmail').val('')
+  //  $('#temp_max').val('')
+    $('#alarme_form').modal('show')
+}
+function pegar_dados_formulario(){
+    var dados = {
+        email: $('#nomeEmail').val(),
+        temp: $('#temp_max').val()
+    }
+    console.log(dados);
+    $('#alarme_form').modal('hide')
+}
+
+$('#alarme_form').submit( function(event){
+    event.preventDefault();
+    $('#alarme_form').modal('hide')
+    var dados = {
+        email: $('#nomeEmail').val(),
+        temp: $('#temp_max').val(),
+        id: 1
+    }
+
+
+    $.ajax({
+        type: "PUT",
+        url: "/api/alarme/" + dados.id,
+        context: this,
+        data: dados,
+        success: function(){
+            console.log("Salvou");
+        },
+        error: function(error){
+            console.log(error);
+        }
+
+    });
+
+})  
+            
+            
+            
+            </script>
     </div>
 
 

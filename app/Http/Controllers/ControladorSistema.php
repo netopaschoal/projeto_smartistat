@@ -140,6 +140,7 @@ class ControladorSistema extends Controller
             foreach($disp as $d){
                 $data_dispositivo = $d->data_grafico;
                 $unidade_temperatura = $d->unidade_temp;
+                $alarme_status = $d->alarme;
             }
             if(count($dados) == 0){
                 echo "nao tem dados";
@@ -185,7 +186,8 @@ class ControladorSistema extends Controller
     }
       return view('grafico', ['id_dispositivo'=>$id,'data_inicio'=>$data_inicio,
       'data_final'=>$data_final,'temp_max'=>$temp_max,'temp_min'=>$temp_min,
-      'temp_media'=>$temp_media,'temp_data'=>$temp_data,'unidade_temperatura'=>$unidade_temperatura,'nome_unidade'=>$nome_unidade]);
+      'temp_media'=>$temp_media,'temp_data'=>$temp_data,'unidade_temperatura'=>$unidade_temperatura,
+      'nome_unidade'=>$nome_unidade,'alarme_status'=>$alarme_status]);
     
 }
     /**

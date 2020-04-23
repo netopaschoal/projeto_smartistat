@@ -16,10 +16,11 @@ class CreateDispositivosTable extends Migration
         Schema::create('dispositivos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nome_dispositivo');
-            $table->string('email_notificacao');
+            $table->string('email_notificacao')->default(" ");
             $table->string('data_grafico')->nullable();
-            $table->string('alarme');
-            $table->string('unidade_temp')->nullable();
+            $table->string('temp_max')->nullable();
+            $table->boolean('alarme')->default(0);
+            $table->string('unidade_temp')->default("1");
             $table->integer('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();

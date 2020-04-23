@@ -6,6 +6,7 @@ use App\Dispositivo;
 use App\Dado;
 use App\User;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -77,6 +78,26 @@ Route::post('/novo_disp','ControladorSistema@store');
 Route::post('/data_grafico/{id}','ControladorSistema@mudar_grafico'); // colocar o token
 
 Route::get('/unidade_temperatura/{id}/{unidade}','ControladorSecundario@mudar_unidade')->name("unidade.temperatura");
+
+Route::post('/gravar', 'ControladorSecundario@gravar');
+
+#                       teste botao
+Route::get('/teste_botao', 'ControladorSecundario@teste_botao');
+Route::get('/status/update', 'ControladorSecundario@updateStatus')->name('users.update.status');
+
+Route::get('/teste_alarme', function () {
+    return view('teste_alarme');
+});
+
+#                       teste email
+
+Route::get('/enviar_email2', function () {
+    Mail::send('mail.treinaweb', ['curso' => 'dispositivo 2'], function($m){
+        $m->from('neto_paschoal@hotmail.com', 'teste 2');
+        $m->subject('smarti stati alarme');
+        $m->to('neto.paschoal@gmail.com');
+    });
+}); 
 
 
 
