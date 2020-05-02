@@ -25,6 +25,13 @@ class ControladorSecundario extends Controller
 
 public function gravar(Request $request){
     $data = $request->all();
+
+    $disp = Dispositivo::where('id',$data['dispositivo_id'])->get();
+    foreach($disp as $d){
+        $email = $d->email_notificacao;
+        $nome_dispositivo = $d->nome_dispositivo;
+        $temperatura = $d->temp_max;
+    }
    
    $valor = new Dado();
    $valor->temperatura = $data['temperatura'];
@@ -32,8 +39,8 @@ public function gravar(Request $request){
 
    $valor->save(); 
    // dispara o evento se a temperatura for maior que o valor setado pelo usuario
-   if($data['temperatura'] > "100"){
-       event(new AlarmeEvent("neto.paschoal@gmail.com"));
+   if($data['temperatura'] > $temperatura){
+       event(new AlarmeEvent($email));
    }
 }
 

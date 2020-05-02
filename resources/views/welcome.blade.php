@@ -1,178 +1,220 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="{{ asset('css/home_danilo.css') }}" rel="stylesheet">
 
-        <title>H-Temp</title>
+    <!-- google fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap"
+          rel="stylesheet">
+<script src="https://kit.fontawesome.com/4a572188cf.js" crossorigin="anonymous"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="icon" href="favicon.ico">
+    <title>SmartiStat</title>
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+    </div>
+  </head>
+  <body>
+  <section id="nav-bar">
+    <nav class="navbar navbar-expand-lg navbar-light">
+  <a class="navbar-brand" href="#"> <img src="{{asset("storage/imagens/logo.png")}}">SmartiStat</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse"
+  data-target="#navbarNav" aria-controls="navbarNav"
+  aria-expanded="false" aria-label="Toggle navigation">
+    <i class="fa fa-bars"></i>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="#">HOME</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">SERVICES</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">ABOUT US</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">CONTACT</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ route('register') }}">REGISTER</a> 
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ route('login') }}">LOG IN</a> 
+      </li>
+    </ul>
+  </div>
+</nav>
+  </section>
 
-        <!-- Styles -->
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-        <style>
-            html, body {
-                font-family:'Poppins', sans-serif;
-                font-size: 16px;
-                margin: 0;
-                margin-bottom: 250px;
-                background-color: #fff;
-            }
- 
+  <!---anner section -------------------->
+  <section id=banner>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <p class="promo-title" >SYSTEM SOLUTION</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+            sed do eiusmod tempor incididunt ut labore et dolore magna
+            aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+            ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            Duis aute irure dolor in reprehenderit in voluptate velit
+            esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+            occaecat cupidatat non proident, sunt in culpa qui officia
+            deserunt mollit anim id est laborum.</p>
+          <a href="#"> <img src="" alt=""></a>
+        </div>
+        <div class="col-md-6 text-center">
+          <img class="img-fluid" src="{{asset("storage/imagens/img1.png")}}" alt="Responsive image">
+        </div>
+      </div>
+    </div>
+      <img src="{{asset("storage/imagens/wave.svg")}}" alt="bottom-img">
+  </section>
 
-            .full-height {
-                height: 30vh;
-            }
+<!-------------Service Section------------------>
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 3px;
-            }
-            /* codigo danilo */
-            #navbar ul{
-  padding: 20px;
-  list-style-type: none;
-  text-align: center;
-  background-color: #288dc0;
-  margin: 10px;
-  height: 70px;
-  border-radius: 5px;
-
-}
-#navbar ul li{
-    display: inline;
-}
-
-#navbar ul li a{
-  text-decoration: none;
-  padding: 5px 40px;
-  border-radius: 15px;
-  color: white;
-  background-color: blue;
-  letter-spacing: 4px;
-  transition: all 0.7s ease-in-out;
-  border: 1px solid white;
-  margin: 10px;
-  font-family: arial;
-}
-#navbar ul li a:hover{
-color: black;
-background-color: white;
-}
-img {
-  background-color: white;
-  margin: 20px;
-  height: 200px;
-  margin-top: 20px;
-
-}
-main{
-  padding: 150px;
-  width: 80%;
-  margin: auto;
-  min-width: 460px;
-
-}
-h2 {
-  font-size: 120%;
-  color: blue;
-}
-/* Meu CSS */
-.Navbar_2 {
-    margin-bottom: 20px;
-}
-        </style>
-    </head>
-    <body>
-            <div>
-                <img src="{{asset("storage/logo_2.png")}}">
-                @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/lista_categorias') }}">Dashboard</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
+      <section id="services">
+        <div class="container text-center">
+          <h1 class="title"> WHAT WE DO?</h1>
+          <div class="row text-center">
+            <div class="col-md-4 services">
+              <img src="{{asset("storage/imagens/logo.png")}}" class="service-img">
+              <h4>Growth Marketing</h4>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                sed do eiusmod tempor incididunt ut labore et dolore magna
+                </p>
             </div>
-            
-            <div id="navbar">
-                <ul>
-                  <li><a href="index.html">Home</a></li>
-                  <li><a href="about.html">About</a></li>
-                  <li><a href="clients.html">Clients</a></li>
-                  <li><a href="#">News</a></li>
-                </ul>
+            <div class="col-md-4 services">
+              <img src="{{asset("storage/imagens/logo.png")}}" class="service-img">
+            <h4>Online Brading</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+              sed do eiusmod tempor incididunt ut labore et dolore magna
+              </p>
+          </div>
+          <div class="col-md-4 services">
+            <img src="{{asset("storage/imagens/logo.png")}}" class="service-img">
+          <h4>COVID-19</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+            sed do eiusmod tempor incididunt ut labore et dolore magna
+            </p>
+        </div>
+        </div>
+        <button type="button"class="btn btn-primary">All Services</button>
+        </div>
+        </section>
+
+        <!-----------------About Us---------------->
+
+        <section id="about-us">
+        <div class="container">
+        <h1 class="title text-center">WHY CHOOSE US</h1>
+        <div class="row">
+          <div class="col-md-6 about-us">
+            <p class="about-title">Why we're different</p>
+            <ul>
+              <li>Understand our client's business goal first</li>
+              <li>Belileve in doing business with honesty</li>
+              <li>We delivery on time</li>
+              <li>We protect your online reputation</li>
+            </ul>
+          </div>
+          <div class="col-md-6">
+          <img src="{{asset("storage/imagens/dash.png")}}" class="img-flui" alt="Responsive image">
+          </div>
+        </div>
+        </div>
+        </section>
+    <!-------------------Brand Area---------------->
+        <section id="brand">
+          <div class="container">
+            <h1 class="title text-center">OUR CLEINTES</h1>
+            <div class="row offset-1">
+              <div class="col-md-5 brand">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                  sed do eiusmod tempor incididunt ut labore et dolore magna Lorem ipsum dolor sit ame ceeqeecer.</p>
+                  <img src="https://pbs.twimg.com/profile_images/378800000580667822/ff281c79330c7950d4011791f623ef33_400x400.jpeg">
+                  <p class="user-details" ><b>Danilo Santana</b><br> Presidente at CMH</p>
               </div>
-              <main>
-                <h2>Should Medication Be Kept in the Fridge?</h2>
-                <h2>Should Medication Be Kept in the Fridge?</h2>
-                  <p>​
-              The Rastrix® monitoring system is one of the most advanced
-              temperature monitoring and sensing solution available.
-              The wireless temperature monitoring solution offers the
-              widest ranges of temperature sensor, humidity sensor,
-              pressure sensor, and data recording. Keeping it simple and
-              empowered by the advanced technology, The Rastrix®
-              monitoring system offers a practical solution specifically
-              designed to meet strict regulatory compliance requirements
-              for hospitals, and other industries where environmental
-              monitoring is critical.</p>
-              
-              
-                  <img src="nurses.jpeg" height="2px">
-                
-              
-              <h2>Should Medication Be Kept in the Fridge?</h2>
-              <p>​
-              The Rastrix® monitoring system is one of the most advanced
-              temperature monitoring and sensing solution available.
-              The wireless temperature monitoring solution offers the
-              widest ranges of temperature sensor, humidity sensor,
-              pressure sensor, and data recording. Keeping it simple and
-              empowered by the advanced technology, The Rastrix®
-              monitoring system offers a practical solution specifically
-              designed to meet strict regulatory compliance requirements
-              for hospitals, and other industries where environmental
-              monitoring is critical.</p>
-              </main>
-    </body>
+              <div class="col-md-5 brand">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                  sed do eiusmod tempor incididunt ut labore et dolore magna Lorem ipsum dolor sit amet, cons.</p>
+                  <img src="https://yt3.ggpht.com/a/AGF-l79w0AaBQnfXbi_7Q8SiMHFxbvLIEKBiLuZp1Q=s900-c-k-c0xffffffff-no-rj-mo">
+                  <p class="user-details" ><b>Danilo Santana</b><br> Presidente at CMH</p>
+              </div>
+              <div class="col-md-5 brand">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                  sed do eiusmod tempor incididunt ut labore et dolore magna Lorem ipsum dolor sit amet, consec.</p>
+                  <img src="https://upload.wikimedia.org/wikipedia/en/thumb/f/f4/Kansas_Jayhawks_logo.svg/1200px-Kansas_Jayhawks_logo.svg.png">
+                  <p class="user-details" ><b>Danilo Santana</b><br> Presidente at CMH</p>
+              </div>
+              <div class="col-md-5 brand">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                  sed do eiusmod tempor incididunt ut labore et dolore magna Lorem ipsum dolor sit amet, cons.</p>
+                  <img src="https://www.gannett-cdn.com/presto/2019/06/21/PSIF/dde3eb3a-8ab6-4e54-a152-f134051542c2-UMKC_logo.png?width=540&height=&fit=bounds&auto=webp">
+                  <p class="user-details" ><b>Danilo Santana</b><br> Presidente at CMH</p>
+              </div>
+              <div class="col-md-5 brand">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                  sed do eiusmod tempor incididunt ut labore et dolore magna Lorem ipsum dolor sit ame ceeqeecer.</p>
+                  <img src="{{asset("storage/imagens/logo.png")}}">
+                  <p class="user-details" ><b>Danilo Santana</b><br> Presidente at CMH</p>
+              </div>
+              <div class="col-md-5 brand">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                  sed do eiusmod tempor incididunt ut labore et dolore magna Lorem ipsum dolor sit amet, cons.</p>
+                  <img src="{{asset("storage/imagens/logo.png")}}">
+                  <p class="user-details" ><b>Danilo Santana</b><br> Presidente at CMH</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-------------------Social Media---------------->
+        <section id="social-media" >
+          <div class="container text-center">
+            <p>FIND US ON SOCIAL MEDIA</p>
+            <div class="social-icons">
+              <i class="social-icon fab fa-instagram"></i>
+              <i class="social-icon fab fa-facebook-f"></i>
+              <i class="social-icon fab fa-twitter"></i>
+              <i class="social-icon fas fa-envelope-square"></i>
+            </div>
+          </div>
+        </section>
+        <!-------------------Footer Media---------------->
+          <section id="footer">
+            <div class="container">
+             <div class="row">
+              <div class="col-md-4 footer-box">
+              <p><b>SmartiStat</b></p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                  sed do eiusmod tempor incididunt ut labore et dolore magna
+                  Lorem ipsum dolor sit amet, cons.</p>
+              </div>
+              <div class="col-md-4 footer-box">
+                <p><b>CONTAC US</b></p>
+                <p><i class="fa fa-map-marker"></i> SmartiStat, United State</p>
+                <p><i class="fa fa-phone"></i> +1 888-888-8888</p>
+                <p><i class="fa fa-envelope-o"></i> smartistat@gmail.com</p>
+            </div>
+
+            <div class="col-md-4 footer-box">
+            <p><b>Subscribe Newsletter</b></p>
+            <input type="email" class="form-control" placeholder="Your Email">
+            <button type="button" class="btn btn-primary">Subcribe</button>
+            </div>
+            </div>
+            </div>
+          </section>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  </body>
 </html>

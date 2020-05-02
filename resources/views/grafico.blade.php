@@ -93,9 +93,9 @@
                                         @csrf
                                         <div class="form-group">
                                             <label for="enviaData">Temperatura máxima</label>
-                                            <h4>3° C</h4>
+                                            <h4 id="linha_temperatura">100° C</h4>
                                             <label for="enviaData">Email de notificação</label>
-                                            <h4>neto_paschoal@hotmail.com</h4>
+                                            <h4 id="linha_email_notificacao">neto_paschoal@hotmail.com</h4>
                                         </div>
                                         
                                     </form></div>
@@ -117,7 +117,7 @@
                         </div>
                         <label for="temp_max" class="control-label">Valor máximo de temperatura</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" id="temp_max" placeholder="Email:">
+                            <input type="text" class="form-control" id="temp_max" placeholder="Temperatura:">
                         </div>
                     </div>
                 </div>
@@ -250,7 +250,13 @@
                     toastr.options.closeButton = true;
                     toastr.options.closeMethod = 'fadeOut';
                     toastr.options.closeDuration = 100;
-                    toastr.success(data.message);
+                    if(status == 1){
+                        toastr.success("Alarme ativado");
+                    }
+                    else{
+                        toastr.success("Alarme desativado");
+                    }
+                  //  toastr.success(data.message);
                 }
             });
         });
@@ -284,6 +290,10 @@ $('#alarme_form').submit( function(event){
         temp: $('#temp_max').val(),
         id: 1
     }
+
+    // alterar o valor do campos na pagina
+    $('#linha_temperatura').html(dados.temp);
+    $('#linha_email_notificacao').html(dados.email);
 
 
     $.ajax({
