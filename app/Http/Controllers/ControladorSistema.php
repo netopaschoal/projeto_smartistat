@@ -141,12 +141,14 @@ class ControladorSistema extends Controller
                 $data_dispositivo = $d->data_grafico;
                 $unidade_temperatura = $d->unidade_temp;
                 $alarme_status = $d->alarme;
+                $temp_max_db = $d->temp_max;
+                $email_notificacao = $d->email_notificacao;
             }
             if(count($dados) == 0){
                 echo "nao tem dados";
             }
             else{                                               // converte pra unidade definida
-                if($unidade_temperatura == "c"){
+                if($unidade_temperatura == "1"){
                     foreach($dados as $dado){                       
                         $temp[$i] = $dado->temperatura;
                     $i++;
@@ -154,18 +156,20 @@ class ControladorSistema extends Controller
                 }
                 else {
                     foreach($dados as $dado){                     // formula   (1 °C × 9/5) + 32 = 33,8 °F
-                        $temp[$i] = ($dado->temperatura * (9/5)) + 32 ;
-                    $i++;
+                        $temp[$i] = $dado->temperatura * (9/5) + 32;
+                        $i++;
                     }
-
+                    $temp_max_db = $temp_max_db * (9/5) + 32;
                 }
                
             }
             if($unidade_temperatura == "1"){
                 $nome_unidade = "Celsius";
+                $simbolo_unidade = " °C";
             } 
             else {
                 $nome_unidade = "Fahrenheit";
+                $simbolo_unidade = " °F";
             }                                                  //termina aqui
             
         $temp_max = max($temp);
@@ -187,7 +191,8 @@ class ControladorSistema extends Controller
       return view('grafico', ['id_dispositivo'=>$id,'data_inicio'=>$data_inicio,
       'data_final'=>$data_final,'temp_max'=>$temp_max,'temp_min'=>$temp_min,
       'temp_media'=>$temp_media,'temp_data'=>$temp_data,'unidade_temperatura'=>$unidade_temperatura,
-      'nome_unidade'=>$nome_unidade,'alarme_status'=>$alarme_status]);
+      'nome_unidade'=>$nome_unidade,'alarme_status'=>$alarme_status,'temp_max_db'=>$temp_max_db,
+      'email_notifi'=>$email_notificacao,'simbolo_unidade'=>$simbolo_unidade]);
     
 }
     /**

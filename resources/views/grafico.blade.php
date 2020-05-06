@@ -35,7 +35,7 @@
                                 <div class="card bg-secondary text-white mb-4">
                                     <div class="card-body">Temperatura média</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <div class="small text-white"><h3>{{$temp_media}}</h3></div>
+                                        <div class="small text-white"><h3>{{$temp_media}}{{$simbolo_unidade}}</h3></div>
                                     </div>
                                 </div>
                             </div>
@@ -43,7 +43,7 @@
                                 <div class="card bg-primary text-white mb-4">
                                     <div class="card-body">Menor valor do período</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <div class="small text-white"><h3>{{$temp_min}}</h3></div>
+                                        <div class="small text-white"><h3>{{$temp_min}}{{$simbolo_unidade}}</h3></div>
                                     </div>
                                 </div>
                             </div>
@@ -51,7 +51,7 @@
                                 <div class="card bg-secondary text-white mb-4">
                                     <div class="card-body">Maior valor do período</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <div class="small text-white"><h3>{{$temp_max}}</h3>
+                                        <div class="small text-white"><h3>{{$temp_max}}{{$simbolo_unidade}}</h3>
                                         </div>
                                     </div>
                                 </div>
@@ -93,9 +93,15 @@
                                         @csrf
                                         <div class="form-group">
                                             <label for="enviaData">Temperatura máxima</label>
-                                            <h4 id="linha_temperatura">100° C</h4>
+                                            <table>
+                                                <tr>
+                                                  <td><h4 id="linha_temperatura">{{$temp_max_db}}</h4></td>
+                                                  <td><h4>{{$simbolo_unidade}}</h4></td>
+                                                </tr>  
+                                              </table>
                                             <label for="enviaData">Email de notificação</label>
-                                            <h4 id="linha_email_notificacao">neto_paschoal@hotmail.com</h4>
+                                            <h4 id="linha_email_notificacao">{{$email_notifi}}</h4>
+                                            
                                         </div>
                                         
                                     </form></div>
