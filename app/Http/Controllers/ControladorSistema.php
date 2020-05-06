@@ -134,7 +134,7 @@ class ControladorSistema extends Controller
         $dados = Dado::where('dispositivo_id',$id)->get();
         $temp[] = 0;
         $i = 0;
-        if (count($disp) == 0)
+        if (count($disp) == 0 )
             echo "<h2>Erro</h2>";
         else {
             foreach($disp as $d){
@@ -145,7 +145,15 @@ class ControladorSistema extends Controller
                 $email_notificacao = $d->email_notificacao;
             }
             if(count($dados) == 0){
-                echo "nao tem dados";
+                    $data_inicio = "Todo o ";
+                    $data_final ="período"; 
+                    $temp_max = "0";
+                    $temp_min = "0";
+                    $temp_media = "0";
+                    $temp_data = "0";
+                    $nome_unidade = "Celsius";
+                    $simbolo_unidade = "C";
+
             }
             else{                                               // converte pra unidade definida
                 if($unidade_temperatura == "1"){
@@ -161,32 +169,35 @@ class ControladorSistema extends Controller
                     }
                     $temp_max_db = $temp_max_db * (9/5) + 32;
                 }
+
+                // mudei aqui
+                if($unidade_temperatura == "1"){
+                    $nome_unidade = "Celsius";
+                    $simbolo_unidade = " °C";
+                } 
+                else {
+                    $nome_unidade = "Fahrenheit";
+                    $simbolo_unidade = " °F";
+                }                                                  //termina aqui
+                
+            $temp_max = max($temp);
+            $temp_min = min($temp);
+            $temp_media = round(array_sum($temp) / count($temp), 2);
+            $temp_data = $dados[count($temp) - 1]['created_at']; // pega a ultima posicao do array
+           // $teste_unidade = "2";
+                if (strlen($data_dispositivo) > 6){
+                    $datas = explode("D", $data_dispositivo);
+                    $data_inicio = $datas[0]." - "; 
+                    $data_final = $datas[1]; 
+        
+                }
+                else {
+                    $data_inicio = "Todo o ";
+                    $data_final ="período"; 
+            }
                
             }
-            if($unidade_temperatura == "1"){
-                $nome_unidade = "Celsius";
-                $simbolo_unidade = " °C";
-            } 
-            else {
-                $nome_unidade = "Fahrenheit";
-                $simbolo_unidade = " °F";
-            }                                                  //termina aqui
-            
-        $temp_max = max($temp);
-        $temp_min = min($temp);
-        $temp_media = round(array_sum($temp) / count($temp), 2);
-        $temp_data = $dados[count($temp) - 1]['created_at']; // pega a ultima posicao do array
-       // $teste_unidade = "2";
-            if (strlen($data_dispositivo) > 6){
-                $datas = explode("D", $data_dispositivo);
-                $data_inicio = $datas[0]." - "; 
-                $data_final = $datas[1]; 
-    
-            }
-            else {
-                $data_inicio = "Todo o ";
-                $data_final ="período"; 
-        }
+           
     }
       return view('grafico', ['id_dispositivo'=>$id,'data_inicio'=>$data_inicio,
       'data_final'=>$data_final,'temp_max'=>$temp_max,'temp_min'=>$temp_min,
