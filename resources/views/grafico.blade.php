@@ -514,8 +514,8 @@ var id = {{$id_dispositivo}};
                     
 
                     for (var n =0; n < Temp.length; n++) { 
-                        teste.push ([new Date(Data[n]), Number(Temp[n])]);
-                        console.log(new Date(Data[n]))
+                        teste.push ([Data[n], Number(Temp[n])]);
+                        
                         } 
                       
           
