@@ -14,6 +14,12 @@
         <!-- <link href="{asset('css/app.css')}}" rel="stylesheet" type="text/css"> -->
         
     </head>
+
+
+
+    
+
+
     <div class="sb-nav-fixed">
         <div id="layoutSidenav">
             
@@ -61,8 +67,11 @@
                             <div class="col-xl-8">
                                 <div class="card mb-4">
                                     <div class="card-header"><i class="fas fa-chart-area mr-1"></i>Gráfico de Temperatura</div>
-                                    <div class="card-body"><canvas id="canvas"></canvas>
-                                        </div>
+                                    {{-- <div class="card-body"><canvas id="canvas"></canvas>
+                                        </div> --}}
+                                        
+                                        <div id="chart_div" style="width: 850px; height: 400px;"></div>
+
                                 </div>
                             </div>
                             <div class="col-xl-4">
@@ -193,8 +202,8 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.3/js/bootstrap-select.min.js" charset="utf-8"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.js" charset="utf-8"></script>
-        <script>
+        {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.js" charset="utf-8"></script> --}}
+        {{-- <script>
         var id = {{$id_dispositivo}};
         var id2 = id.toString();
         var unidade_temp = {{$unidade_temperatura}};
@@ -228,13 +237,19 @@
                           data: Temp,
                           borderWidth: 3,
                           borderColor: 'rgb(77,166,253)',
-                          backgroundColor: 'rgba(70,166,253,0.35)'
-                          
+                          backgroundColor: 'rgba(70,166,253,0.35)',
                       }]
                   },
                   options: {
-                    
+                    explorer: { 
+                        actions: ['dragToZoom', 'rightClickToReset'],
+        axis: 'horizontal',
+        keepInBounds: true,
+        maxZoomIn: 4.0 }
+        
                   }
+                    
+    
               });
           });
         });
@@ -320,8 +335,284 @@ $('#alarme_form').submit( function(event){
             
             
             
-            </script>
-    </div>
+            </script> --}}
+            {{-- <script type="text/javascript">
+var id = {{$id_dispositivo}};
+        var id2 = id.toString();
+        var unidade_temp = {{$unidade_temperatura}};
+        var unidade_temp2 = unidade_temp.toString();
+        var url = `{{url('stock/chart/${id2}')}}`;
+        var Data = new Array();
+        var Temp = new Array();
+        $(document).ready(function(){
+          $.get(url, function(response){
+              if(unidade_temp2 == "2"){
+                response.forEach(function(data){ //                         fazer aqui a convesao de unidade
+                Temp.push((Number(data.temperatura) * (9/5)) + 32);         // formula   (1 °C × 9/5) + 32 = 33,8 °F
+                Data.push(data.created_at);
+            });   
+              }
+              else {
+                response.forEach(function(data){ //                        
+                Temp.push(data.temperatura);                                
+                Data.push(data.created_at);
+            }); 
+              }
+
+              google.charts.load('current', {
+                    'packages': ['corechart']
+                  });
+                  google.charts.setOnLoadCallback(drawChart);
+            
+                  function drawChart() {
+
+                      models = ['tesla','fusca','bmw','ds','ff','tesla','fusca','bmw','ds','ff','tesla','fusca','bmw','ds','ff','tesla','fusca','bmw','ds','ff',
+                      'tesla','fusca','bmw','ds','ff','tesla','fusca','bmw','ds','ff','tesla','fusca','bmw','ds','ff','tesla','fusca','bmw','ds','ff',
+                      'tesla','fusca','bmw','ds','ff','tesla','fusca','bmw','ds','ff','tesla','fusca','bmw','ds','ff','tesla','fusca','bmw','ds','ff',
+                      'tesla','fusca','bmw','ds','ff','tesla','fusca','bmw','ds','ff','tesla','fusca','bmw','ds','ff','tesla','fusca','bmw','ds','ff',
+                      'tesla','fusca','bmw','ds','ff','tesla','fusca','bmw','ds','ff','tesla','fusca','bmw','ds','ff','tesla','fusca','bmw','ds','ff',
+                      'tesla','fusca','bmw','ds','ff','tesla','fusca','bmw','ds','ff','tesla','fusca','bmw','ds','ff','tesla','fusca','bmw','ds','ff',
+                      'tesla','fusca','bmw','ds','ff','tesla','fusca','bmw','ds','ff','tesla','fusca','bmw','ds','ff','tesla','fusca','bmw','ds','ff',
+                      'tesla','fusca','bmw','ds','ff','tesla','fusca','bmw','ds','ff','tesla','fusca','bmw','ds','ff','tesla','fusca','bmw','ds','ff',
+                      'tesla','fusca','bmw','ds','ff','tesla','fusca','bmw','ds','ff','tesla','fusca','bmw','ds','ff','tesla','fusca','bmw','ds','ff',
+                      'tesla','fusca','bmw','ds','ff','tesla','fusca','bmw','ds','ff','tesla','fusca','bmw','ds','ff','tesla','fusca','bmw','ds','ff',
+                      'tesla','fusca','bmw','ds','ff','tesla','fusca','bmw','ds','ff','tesla','fusca','bmw','ds','ff','tesla','fusca','bmw','ds','ff',
+                      'tesla','fusca','bmw','ds','ff','tesla','fusca','bmw','ds','ff','tesla','fusca','bmw','ds','ff','tesla','fusca','bmw','ds','ff',
+                      'tesla','fusca','bmw','ds','ff','tesla','fusca','bmw','ds','ff','tesla','fusca','bmw','ds','ff','tesla','fusca','bmw','ds','ff',
+                      'tesla','fusca','bmw','ds','ff','tesla','fusca','bmw','ds','ff','tesla','fusca','bmw','ds','ff','tesla','fusca','bmw','ds','ff',
+                      'tesla','fusca','bmw','ds','ff','tesla','fusca','bmw','ds','ff','tesla','fusca','bmw','ds','ff','tesla','fusca','bmw','ds','ff',
+                      'tesla','fusca','bmw','ds','ff','tesla','fusca','bmw','ds','ff','tesla','fusca','bmw','ds','ff','tesla','fusca','bmw','ds','ff'];
+                      cars = [10,20,30,1,5,67,34,1,2,8,4,54,23,21,14,17,10,1,56,17,10,20,30,1,5,67,34,1,2,8,4,54,23,21,14,17,10,1,56,17,
+                      10,20,30,1,5,67,34,1,2,8,4,54,23,21,14,17,10,1,56,17,10,20,30,1,5,67,34,1,2,8,4,54,23,21,14,17,10,1,56,17,
+                      10,20,30,1,5,67,34,1,2,8,4,54,23,21,14,17,10,1,56,17,10,20,30,1,5,67,34,1,2,8,4,54,23,21,14,17,10,1,56,17,
+                      10,20,30,1,5,67,34,1,2,8,4,54,23,21,14,17,10,1,56,17,10,20,30,1,5,67,34,1,2,8,4,54,23,21,14,17,10,1,56,17,
+                      10,20,30,1,5,67,34,1,2,8,4,54,23,21,14,17,10,1,56,17,10,20,30,1,5,67,34,1,2,8,4,54,23,21,14,17,10,1,56,17,
+                      10,20,30,1,5,67,34,1,2,8,4,54,23,21,14,17,10,1,56,17,10,20,30,1,5,67,34,1,2,8,4,54,23,21,14,17,10,1,56,17,
+                      10,20,30,1,5,67,34,1,2,8,4,54,23,21,14,17,10,1,56,17,10,20,30,1,5,67,34,1,2,8,4,54,23,21,14,17,10,1,56,17,
+                      10,20,30,1,5,67,34,1,2,8,4,54,23,21,14,17,10,1,56,17,10,20,30,1,5,67,34,1,2,8,4,54,23,21,14,17,10,1,56,17];
+
+                    var dataArray = [['Dia','Temperatura']];
+                    
+
+                        /* for (var n =0; n < Temp.length; n++) { 
+                        dataArray.push ([Data[n], Number(Temp[n])])
+                            } */
+                            for (var n =0; n < models.length; n++) { 
+                        dataArray.push ([models[n], cars[n]])
+                            }
+                                
+                    
+                    var data = new google.visualization.arrayToDataTable(dataArray);
+                        
+                    
+            
+                    var options = {
+                      
+                        title: 'Company Performance',
+          hAxis: {
+            title: 'Year',
+            titleTextStyle: {
+              color: '#333'
+            },
+            slantedText: true,
+            slantedTextAngle: 80
+          },
+          vAxis: {
+            minValue: 0
+          },
+          explorer: {
+            actions: ['dragToZoom', 'rightClickToReset'],
+            axis: 'horizontal',
+            keepInBounds: true,
+            maxZoomIn: 4.0
+          },
+          colors: ['#D44E41'],
+        };
+            
+                    var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+                    chart.draw(data, options);
+                  }
+                                          //acaba aqui
+            /* var ctx = document.getElementById("canvas").getContext('2d');
+                var myChart = new Chart(ctx, {
+                  type: 'line',
+                  
+                  data: {
+                      labels:Data,
+                      datasets: [{
+                           label: 'Temperatura',
+                          data: Temp,
+                          borderWidth: 3,
+                          borderColor: 'rgb(77,166,253)',
+                          backgroundColor: 'rgba(70,166,253,0.35)',
+                      }]
+                  },
+                  options: {
+                    explorer: { 
+                        actions: ['dragToZoom', 'rightClickToReset'],
+        axis: 'horizontal',
+        keepInBounds: true,
+        maxZoomIn: 4.0 }
+        
+                  }
+                    
+    
+              }); */
+          });
+        });
+
+
+               
+
+
+
+
+
+        
+                
+                </script> --}}
+                <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+                <div id="chart_div" style="width: 500px; height: 300px;"></div>
+            
+                <script type="text/javascript">
+
+
+var id = {{$id_dispositivo}};
+        var id2 = id.toString();
+        var unidade_temp = {{$unidade_temperatura}};
+        var unidade_temp2 = unidade_temp.toString();
+        var url = `{{url('stock/chart/${id2}')}}`;
+        var Data = new Array();
+        var Temp = new Array();
+        $(document).ready(function(){
+          $.get(url, function(response){
+              if(unidade_temp2 == "2"){
+                response.forEach(function(data){ //                         fazer aqui a convesao de unidade
+                Temp.push((Number(data.temperatura) * (9/5)) + 32);         // formula   (1 °C × 9/5) + 32 = 33,8 °F
+                Data.push(data.created_at);
+            });   
+              }
+              else {
+                response.forEach(function(data){ //                        
+                Temp.push(data.temperatura);                                
+                Data.push(data.created_at);
+            }); 
+              }
+              google.charts.load('current', {
+                    'packages': ['corechart']
+                  });
+                  google.charts.setOnLoadCallback(drawChart);
+            
+                  
+            
+                  function drawChart() {
+                   /*  var data = google.visualization.arrayToDataTable([
+                   
+                    ]); */
+                     var dataArray = [['teste','teste2']];
+                     var teste = [['ano','temperatura']];
+                    
+
+                    for (var n =0; n < Temp.length; n++) { 
+                        teste.push ([new Date(Data[n]), Number(Temp[n])]);
+                        console.log(new Date(Data[n]))
+                        } 
+                      
+          
+                        var data = google.visualization.arrayToDataTable(teste);
+                
+                /* var data = google.visualization.arrayToDataTable(dataArray); */
+              //  var data =  google.visualization.arrayToDataTable(dataArray);
+
+        /* [new Date(2086, 01, 01), 13] */
+            
+                    var options = {
+                      legend: {position: 'top', maxLines: 1},
+                      hAxis: {
+                        title: 'Data',
+                        titleTextStyle: {
+                          color: '#333'
+                        },
+                        slantedText: true,
+                        slantedTextAngle: 80
+                      },
+                      vAxis: {
+                        
+                      },
+                      explorer: {
+                        actions: ['dragToZoom', 'rightClickToReset'],
+                        axis: 'horizontal',
+                        keepInBounds: false,
+                        maxZoomIn: 4.0
+                      },
+                      colors: ['#D44E41'],
+                    };
+            
+                    var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+                    chart.draw(data, options);
+                  }
+              
+                                          //acaba aqui
+            
+
+
+          });
+        });
+               /*  google.charts.load('current', {
+                    'packages': ['corechart']
+                  });
+                  google.charts.setOnLoadCallback(drawChart);
+            
+                  
+            
+                  function drawChart() {
+                   /*  var data = google.visualization.arrayToDataTable([
+                   
+                    ]); */
+                     /* var dataArray = [['teste','teste2']];
+                     var teste = [['year','sales'],[1000,30],[1500,50],[2000,70]];
+                    
+
+                    for (var n =0; n < 200; n++) { 
+                        teste.push ([n*3 + 2000, Math.floor(Math.random() * 100) + 1]);
+                        } 
+                      
+          
+                        var data = google.visualization.arrayToDataTable(teste); */
+                
+                /* var data = google.visualization.arrayToDataTable(dataArray); */
+              //  var data =  google.visualization.arrayToDataTable(dataArray);
+
+        /* [new Date(2086, 01, 01), 13] */
+            
+                    /* var options = {
+                      title: 'Company Performance',
+                      hAxis: {
+                        title: 'Year',
+                        titleTextStyle: {
+                          color: '#333'
+                        },
+                        slantedText: true,
+                        slantedTextAngle: 80
+                      },
+                      vAxis: {
+                        minValue: 0
+                      },
+                      explorer: {
+                        actions: ['dragToZoom', 'rightClickToReset'],
+                        axis: 'horizontal',
+                        keepInBounds: true,
+                        maxZoomIn: 4.0
+                      },
+                      colors: ['#D44E41'],
+                    };
+            
+                    var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+                    chart.draw(data, options);
+                  }  */
+                
+                </script>
+</div>
 
 
 @endsection
